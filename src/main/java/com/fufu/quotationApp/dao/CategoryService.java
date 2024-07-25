@@ -18,8 +18,8 @@ public class CategoryService {
     }
 
     public void save(Category category) {
-        String sql = "INSERT INTO categories (name) values (?)";
-        jdbcTemplate.update(sql, category.getName());
+        String sql = "INSERT INTO categories (name, color) values (?,?)";
+        jdbcTemplate.update(sql, category.getName(), category.getColor());
     }
 
     public List<Category> get() {

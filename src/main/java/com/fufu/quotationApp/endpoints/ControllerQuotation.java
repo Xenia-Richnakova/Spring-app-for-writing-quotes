@@ -28,6 +28,7 @@ public class ControllerQuotation {
         return res.toString();
     }
 
+    // ADD QUOT
     @PostMapping(
             path="/qouts",
             consumes = {
@@ -38,6 +39,9 @@ public class ControllerQuotation {
         qoutationService.save(qout);
         return TemplateQoutation.PostQouteForm;
     }
+
+    // GET ADDING QUOT FORM (for comboboxes)
+ //   TODO: spravit z PostQouteForm funkciu
 
     @DeleteMapping("/qouts/{id}")
     public ResponseEntity<Void> deleteQout(@PathVariable("id") int id) {

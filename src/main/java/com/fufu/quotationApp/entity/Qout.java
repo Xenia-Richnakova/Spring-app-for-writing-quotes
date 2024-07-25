@@ -7,15 +7,36 @@ public class Qout {
     private String author;
     private String text;
     private String title;
+    private Category category;
     private int id;
 
     public Qout() {
+    }
+
+    @Override
+    public String toString() {
+        return "Qout{" +
+                "author='" + author + '\'' +
+                ", text='" + text + '\'' +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Qout(Map<String, Object> mapa) {
         author = (String) mapa.get("author");
         text = (String) mapa.get("text");
         title = (String) mapa.get("title");
+        category = new Category ((String) mapa.get("name"), (int) mapa.get("catgId"), (String) mapa.get("color"));
         id = (int) mapa.get("id");
     }
 
@@ -51,15 +72,6 @@ public class Qout {
         this.title = title;
     }
 
-    @Override
-    public String toString() {
-        return "Qout{" +
-                "author='" + author + '\'' +
-                ", text='" + text + '\'' +
-                ", title='" + title + '\'' +
-                '}';
-    }
-
     public String toHTML() {
         return "\n" +
                 "\n" +
@@ -67,6 +79,7 @@ public class Qout {
                 "        <h5 class=\"mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white\">" + title + "</h5>\n" +
                 "        <p class=\"font-bold tracking-tight text-gray-900 dark:text-white\">" + author + "</p>\n" +
                 "    <p class=\"mb-3 font-normal text-gray-700 dark:text-gray-400\">" + text + "</p>\n" +
+                "       <p style=\"background-color: " + category.getColor() +  "\" class=\"focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900\">" + category.getName() + "</p>\n" +
                 "    <button hx-delete=\"/qouts/" + id +"\" type=\"button\" class=\"focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900\">Delete</button>" +
                 "    <a href=\"/editQuot/" + id +"\" type=\"button\" class=\"focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900\">Edit</a>" +
                 "</div>\n";
